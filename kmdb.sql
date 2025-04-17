@@ -17,12 +17,12 @@
 
 -- User stories
 --
--- - As a guest, I want to see a list of movies with the title, year released,
---   MPAA rating, and studio information.
--- - As a guest, I want to see the movies which a single studio has produced.
--- - As a guest, I want to see each movie's cast including each actor's
+-- - (Check) - As a guest, I want to see a list of movies with the title, year released,
+--   MPAA rating, and studio information. 
+-- - (Check) - As a guest, I want to see the movies which a single studio has produced.
+-- - (Check) - As a guest, I want to see each movie's cast including each actor's
 --   name and the name of the character they portray.
--- - As a guest, I want to see the movies which a single actor has acted in.
+-- - (Check) - As a guest, I want to see the movies which a single actor has acted in.
 -- * Note: The "guest" user role represents the experience prior to logging-in
 --   to an app and typically does not have a corresponding database table.
 
@@ -113,12 +113,77 @@
 -- Drop existing tables, so you'll start fresh each time this script is run.
 -- TODO!
 
+DROP TABLE movie IF EXISTS;
+DROP TABLE studio IF EXISTS;
+DROP TABLE actor IF EXISTS;
+DROP TABLE cast IF EXISTS;
+
 -- Create new tables, according to your domain model
 -- TODO!
+
+CREATE TABLE movie (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    movie_title TEXT,
+    year_released INTEGER,
+    MPAA_rating TEXT,
+    studio_id INTEGER
+);
+
+CREATE TABLE studio (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT
+);
+
+CREATE TABLE actor (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT
+);
+
+CREATE TABLE movie_actor (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    movie_id INTEGER,
+    actor_id INTEGER,
+    character_name TEXT
+);
 
 -- Insert data into your database that reflects the sample data shown above
 -- Use hard-coded foreign key IDs when necessary
 -- TODO!
+
+--Code to insert data into movie table
+
+INSERT INTO movie (
+    movie_title,
+    year_released,
+    MPAA_rating
+    studio_id
+)
+VALUES ("Batman Begins", 2005, "PG-13", 1), 
+VALUES ("The Dark Knight", 2008, "PG-13", 1),
+VALUES ("The Dark Knight Rises", 2012, "PG-13", 1);
+
+--Code to insert data into studio table
+INSERT INTO studio (
+    name
+)
+VALUES ("Warner Bros.");
+
+--Code to insert data into actor table
+INSERT INTO actor (
+    name
+)
+VALUES ("Christian Bale"), ("Michael Caine") , ("Liam Neeson")
+("Katie Holmes"), ("Gary Oldman") , ("Heath Ledger"), ("Aaron Eckhart"),
+("Maggie Gyllenhaal") ,("Tom Hardy"), ("Joseph Gordon-Levitt") , ("Anne Hathaway");
+
+--Code to insert data into movie_actor table
+INSERT INTO movie_actor (
+    movie_id,
+    actor_id,
+    character_name
+)
+VALUES (),(),()
+
 
 -- Prints a header for the movies output
 .print "Movies"
